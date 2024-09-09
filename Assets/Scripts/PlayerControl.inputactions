@@ -1,0 +1,45 @@
+{
+    "name": "PlayerControl",
+    "maps": [
+        {
+            "name": "move",
+            "id": "ce00a415-ce22-42ee-aeb0-cf796e32818a",
+            "actions": [
+                {
+                    "name": "Forward",
+                    "type": "Button",
+                    "id": "e222a822-d8d3-4105-8400-4969ee60cd1e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "46f72fb5-f1cd-43b7-99a6-598f67177a4f",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Forward",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4b6676a1-6230-453b-9dfa-87f034edf8ca",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Forward",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
