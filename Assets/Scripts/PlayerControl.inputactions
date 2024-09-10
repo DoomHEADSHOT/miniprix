@@ -7,9 +7,9 @@
             "actions": [
                 {
                     "name": "Forward",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "e222a822-d8d3-4105-8400-4969ee60cd1e",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -17,26 +17,59 @@
             ],
             "bindings": [
                 {
-                    "name": "",
-                    "id": "46f72fb5-f1cd-43b7-99a6-598f67177a4f",
-                    "path": "<Keyboard>/w",
+                    "name": "2D Vector",
+                    "id": "94156730-eb5c-406a-8615-a48291ab51da",
+                    "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Forward",
-                    "isComposite": false,
+                    "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "4b6676a1-6230-453b-9dfa-87f034edf8ca",
+                    "name": "up",
+                    "id": "4a197ce8-c712-47fe-919f-1713e206de9c",
                     "path": "<Keyboard>/z",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Forward",
                     "isComposite": false,
-                    "isPartOfComposite": false
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "f0a035da-35b0-4a3e-9a61-27343ea9e8cf",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Forward",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "eaeab16d-d640-451f-ae1e-e5b83da0cd19",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Forward",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "c93bb48b-d194-4b73-9215-a1a8a45fd85d",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Forward",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }
