@@ -3726,7 +3726,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 18057ea5f41884a42959fc3014a3adae,
         type: 3}
       propertyPath: m_Name
-      value: character-female-f
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4070,8 +4070,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 619100604e649784f881b2b1b386db48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.2
-  rotationSpeed: 0
+  Camera: {fileID: 330585545}
+  speed: 7
+  rotationSpeed: 15
+  inputMovement: {x: 0, y: 0}
 --- !u!114 &2010410835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4100,7 +4102,7 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: move
+  m_DefaultActionMap: PlayerMovement
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!1001 &2019916749

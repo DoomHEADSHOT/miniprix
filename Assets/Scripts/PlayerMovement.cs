@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class PlayerMovement : MonoBehaviour
 {
-    //PlayerControl playerControl;
+    PlayerControl playerControl;
+    
+    Vector3 targetDirection;
+    [SerializeField] Camera Camera;
     //Vector2 inputMovement;
  
     // The Rigidbody attached to the GameObject.
@@ -13,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
     /// <summary>
     /// Speed scale for the velocity of the Rigidbody.
     /// </summary>
-    public float speed;
+    public float speed = 7;
     /// <summary>
     /// Rotation Speed scale for turning.
     /// </summary>
@@ -21,9 +25,10 @@ public class PlayerMovement : MonoBehaviour
     // The vertical input from input devices.
     private float vertical;
     private float horizontal;
+
+    public Vector2 inputMovement;
  
   
-    Transform Transform;
     private void Awake()
     {
     }
@@ -31,50 +36,56 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         body = GetComponent<Rigidbody>();
-        Transform = GetComponent<Transform>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        vertical = Input.GetAxisRaw("Vertical");
+        vertical = inputMovement.y;
+        horizontal = inputMovement.x;
+
+        transform.Translate(transform.forward * vertical * Time.deltaTime);
+        transform.Translate(transform.right * -horizontal * Time.deltaTime);
+
+        targetDirection = Vector3.zero;
+        targetDirection = Camera.transform.forward * vertical;
+        targetDirection += Camera.transform.right * horizontal;
+        targetDirection.Normalize();
+        targetDirection.y = 0;
+
+        if(targetDirection == Vector3.zero)
+        {
+            targetDirection = transform.forward;
+        }
+
+        Quaternion newRotation = Quaternion.LookRotation(targetDirection);
+        Quaternion targetRotation = Quaternion.Slerp(transform.rotation, newRotation, rotationSpeed * Time.deltaTime);
+        transform.rotation = targetRotation;
+
+        /*vertical = Input.GetAxisRaw("Vertical");
         horizontal = Input.GetAxisRaw("Horizontal");
+
+        if (horizontal != 0)
+        {
+            transform.Translate(new Vector3(-2 * horizontal * Time.deltaTime, 0f, 0f));
+
+        }
+        else if (vertical != 0)
+        {
+            transform.Translate(new Vector3(0, 0, -2 * vertical * Time.deltaTime));
+        }*/
+
 
         //transform.Rotate((transform.up * horizontal) * rotationSpeed * Time.fixedDeltaTime);
     }
-    private void FixedUpdate()
-    {
-        if (horizontal != 0) {
-            transform.position = (transform.position * horizontal) * speed;
-
-        }
-        else    if (vertical != 0) {
-            transform.position = (transform.position * vertical) * speed;
-        }
-
-        if (horizontal >= 0)
-        {
-            Transform.rotation = Quaternion.Euler(0, 90, 0);
-        }
-        if (horizontal <= 0)
-        {
-        
-            Transform.rotation = Quaternion.Euler(0, -90, 0);
-        }
-        if (vertical >= 0) 
-        {
-        
-        }
-        if(vertical <= 0)
-        {
- 
-        }
-    }
+  
 
     private void OnEnable()
     {
-        //playerControl = new PlayerControl();
+        playerControl = new PlayerControl();
 
-        //playerControl.move.Forward.performed += i => inputMovement = i.ReadValue<Vector2>();
+        playerControl.PlayerMovement.Movement.performed += i => inputMovement = i.ReadValue<Vector2>();
+
+        playerControl.Enable();
     }
 }

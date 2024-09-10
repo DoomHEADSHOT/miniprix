@@ -2,11 +2,11 @@
     "name": "PlayerControl",
     "maps": [
         {
-            "name": "move",
+            "name": "PlayerMovement",
             "id": "ce00a415-ce22-42ee-aeb0-cf796e32818a",
             "actions": [
                 {
-                    "name": "Forward",
+                    "name": "Movement",
                     "type": "PassThrough",
                     "id": "e222a822-d8d3-4105-8400-4969ee60cd1e",
                     "expectedControlType": "Vector2",
@@ -17,24 +17,24 @@
             ],
             "bindings": [
                 {
-                    "name": "2D Vector",
+                    "name": "Keyboard",
                     "id": "94156730-eb5c-406a-8615-a48291ab51da",
                     "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Forward",
+                    "action": "Movement",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "up",
                     "id": "4a197ce8-c712-47fe-919f-1713e206de9c",
-                    "path": "<Keyboard>/z",
+                    "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Forward",
+                    "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -45,18 +45,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Forward",
+                    "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "left",
                     "id": "eaeab16d-d640-451f-ae1e-e5b83da0cd19",
-                    "path": "<Keyboard>/q",
+                    "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Forward",
+                    "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -67,7 +67,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Forward",
+                    "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
                 }
