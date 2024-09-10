@@ -27,8 +27,11 @@ public class PlayerMovement : MonoBehaviour
     private float horizontal;
 
     public Vector2 inputMovement;
- 
-  
+
+    private float cameraSmoothSpeed = 1; //THE BIGGER THIS NUMBER ,THE LONGER FOR THE CAMERA TO REACH ITS POSITION DURING MOVEMENT
+    private Vector3 cameraVelocity;
+
+
     private void Awake()
     {
     }
@@ -62,6 +65,8 @@ public class PlayerMovement : MonoBehaviour
         Quaternion targetRotation = Quaternion.Slerp(transform.rotation, newRotation, rotationSpeed * Time.deltaTime);
         transform.rotation = targetRotation;
 
+        HandleFollowTarget();
+
         /*vertical = Input.GetAxisRaw("Vertical");
         horizontal = Input.GetAxisRaw("Horizontal");
 
@@ -78,7 +83,12 @@ public class PlayerMovement : MonoBehaviour
 
         //transform.Rotate((transform.up * horizontal) * rotationSpeed * Time.fixedDeltaTime);
     }
-  
+
+    private void HandleFollowTarget()
+    {
+        Vector3 targetCameraPosition = Vector3.SmoothDamp(Camera.transform.position, transform.position - new Vector3(0,-5,3), ref cameraVelocity, cameraSmoothSpeed * Time.deltaTime);
+        Camera.transform.position = targetCameraPosition;
+    }
 
     private void OnEnable()
     {
