@@ -96,6 +96,7 @@ public class PlayerMovement : MonoBehaviour
 
         playerControl.PlayerMovement.Movement.performed += i => inputMovement = i.ReadValue<Vector2>();
 
+
         playerControl.Enable();
     }
 }
