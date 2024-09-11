@@ -47,8 +47,8 @@ public class PlayerMovement : MonoBehaviour
         vertical = inputMovement.y;
         horizontal = inputMovement.x;
 
-        transform.Translate(transform.forward * vertical * Time.deltaTime);
-        transform.Translate(transform.right * -horizontal * Time.deltaTime);
+        transform.Translate(transform.forward * vertical * speed *Time.deltaTime);
+        transform.Translate(transform.right * -horizontal * speed * Time.deltaTime);
 
         targetDirection = Vector3.zero;
         targetDirection = Camera.transform.forward * vertical;
