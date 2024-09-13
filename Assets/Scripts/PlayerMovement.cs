@@ -47,41 +47,15 @@ public class PlayerMovement : MonoBehaviour
         vertical = inputMovement.y;
         horizontal = inputMovement.x;
 
-        transform.Translate(transform.forward * vertical * Time.deltaTime);
-        transform.Translate(transform.right * -horizontal * Time.deltaTime);
+        Vector3 movement = new Vector3(inputMovement.x, 0, inputMovement.y);
 
-        targetDirection = Vector3.zero;
-        targetDirection = Camera.transform.forward * vertical;
-        targetDirection += Camera.transform.right * horizontal;
-        targetDirection.Normalize();
-        targetDirection.y = 0;
+        if( movement != Vector3.zero )
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), rotationSpeed * Time.deltaTime);
 
-        if(targetDirection == Vector3.zero)
-        {
-            targetDirection = transform.forward;
-        }
+        transform.Translate(movement * speed * Time.deltaTime, Space.World);
 
-        Quaternion newRotation = Quaternion.LookRotation(targetDirection);
-        Quaternion targetRotation = Quaternion.Slerp(transform.rotation, newRotation, rotationSpeed * Time.deltaTime);
-        transform.rotation = targetRotation;
+        //HandleFollowTarget();
 
-        HandleFollowTarget();
-
-        /*vertical = Input.GetAxisRaw("Vertical");
-        horizontal = Input.GetAxisRaw("Horizontal");
-
-        if (horizontal != 0)
-        {
-            transform.Translate(new Vector3(-2 * horizontal * Time.deltaTime, 0f, 0f));
-
-        }
-        else if (vertical != 0)
-        {
-            transform.Translate(new Vector3(0, 0, -2 * vertical * Time.deltaTime));
-        }*/
-
-
-        //transform.Rotate((transform.up * horizontal) * rotationSpeed * Time.fixedDeltaTime);
     }
 
     private void HandleFollowTarget()
