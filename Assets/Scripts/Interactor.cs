@@ -5,10 +5,12 @@ using UnityEngine;
 public class Interactor : MonoBehaviour
 {
     PlayerControl playerControl;
-    float interactionTrue;
+    
+    bool interactionTrue;
     // Start is called before the first frame update
     public Transform InteractorSource;
     public float InteractRange;
+    [SerializeField] GameObject item;
     void Start()
     {
         
@@ -18,7 +20,9 @@ public class Interactor : MonoBehaviour
     void Update()
     {
 
-        if (interactionTrue>0) {
+        if (interactionTrue) {
+            interactionTrue = false;
+            ShelfManager.instance.AddItem(item);
             Debug.Log("E pressed");
         }
     }
@@ -26,7 +30,7 @@ public class Interactor : MonoBehaviour
     {
         playerControl = new PlayerControl();
 
-        playerControl.Interact.Interaction.performed += i => interactionTrue = i.ReadValue<float>();
+        playerControl.Interact.Interaction.performed += i => interactionTrue = true;
 
         playerControl.Enable();
     }

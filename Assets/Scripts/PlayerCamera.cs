@@ -7,7 +7,7 @@ public class PlayerCamera : MonoBehaviour
     public Transform player;
     public Vector3 offset;
     public Vector3 velocity = Vector3.zero;
-    public float cameraSmoothSpeed;
+    public float cameraSmoothSpeed = 1; //THE BIGGER THIS NUMBER ,THE LONGER FOR THE CAMERA TO REACH ITS POSITION DURING MOVEMENT
 
     // Start is called before the first frame update
     void Start()
