@@ -11,27 +11,27 @@ public class ShelfManager : MonoBehaviour
     public Transform[] itemPositions; // Positions where items can be placed
     public Vector3 velocity;
     public float itemSmoothSpeed;
-    public GameObject lastItem = null;
+    public GameObject itemModel = null;
     public ItemInstantiationSlot[] itemSlots;
     public int itemCount = 0;
 
     private void Awake()
     {
-        if(instance == null)
+        /*if(instance == null)
         {
             instance = this;
         }
         else
         {
             Destroy(gameObject);
-        }
-
+        }*/
+        instance = this;
         itemSlots = GetComponentsInChildren<ItemInstantiationSlot>();
     }
 
     private void Update()
     {
-        /*if (lastItem != null)
+        /*if (itemModel != null)
         {
             for (int i = 0; i < storedItems.Count; i++)
             {
@@ -54,28 +54,25 @@ public class ShelfManager : MonoBehaviour
         {
             newItem.ItemCount++;
             storedItems.Add(newItem);
+            Debug.Log("1- Stored items count: " + storedItems[0].ItemCount);
         }
         else
         {
             storedItems.FirstOrDefault(i => i.itemID == newItem.itemID).ItemCount ++;
+            Debug.Log("2- Stored items count: " + storedItems[0].ItemCount);
         }
 
-        lastItem = Instantiate(item.itemModel);
+        itemModel = Instantiate(item.itemModel);
         foreach(ItemInstantiationSlot slot in itemSlots)
         {
             if(slot.currentItemModel == null)
             {
-                slot.LoadItem(lastItem);
+                slot.LoadItem(itemModel);
                 slot.itemID = item.itemID;
                 itemCount++;
                 return true;
             }
         }
-
-        /*GameObject newItem = Instantiate(itemPrefab,PlayerManager.instance.transform.position , Quaternion.identity);
-        newItem.transform.SetParent(this.transform); // Make item a child of the shelf
-        storedItems.Add(newItem);
-        lastItem = newItem;*/
         return false;
     }
 
@@ -90,9 +87,11 @@ public class ShelfManager : MonoBehaviour
             {
                 if (slot.itemID == removedItem.itemID)
                 {
-                    Debug.Log("Item Model found : " + removedItem.itemName);
+                    Debug.Log("Item Model found : " + removedItem.itemName);    
                     slot.UnloadItem();
-                    removedItem.ItemCount--;
+                    storedItems.FirstOrDefault(i => i.itemID == removedItem.itemID).ItemCount--;
+                    itemCount--;
+                    Debug.Log("3- Stored items count :" + storedItems[0].ItemCount);
                     Debug.Log("Item count = " + removedItem.ItemCount);
                     if(removedItem.ItemCount <= 0)
                     {
@@ -103,7 +102,7 @@ public class ShelfManager : MonoBehaviour
                     return true;
                 }
             }
-            
+          
         }
         Debug.Log("Item not found on shelf!");
         return false;

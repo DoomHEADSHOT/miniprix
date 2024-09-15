@@ -16,6 +16,6 @@ MonoBehaviour:
   itemPrice: 7
   itemID: 1
   itemIcon: {fileID: 0}
-  itemTargetPosition: {fileID: 0}
+  ItemCount: 0
   itemModel: {fileID: 6136658526321158282, guid: d53e84cf6a855014087b65d31c9184c7,
     type: 3}
