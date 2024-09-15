@@ -100,9 +100,18 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
             ""id"": ""d69050a3-5d7c-46dc-ba42-f3b6dd6174c2"",
             ""actions"": [
                 {
-                    ""name"": ""Interaction"",
+                    ""name"": ""AddItem"",
                     ""type"": ""Button"",
                     ""id"": ""e761abf6-fd3b-4e1b-9b83-d49ae27f8f5f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Tap"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RemoveItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""efb09084-626c-4671-ba28-a717a39fbafd"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Tap"",
@@ -117,7 +126,18 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Interaction"",
+                    ""action"": ""AddItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9c7caf87-2809-46e9-8bef-7c2cf4ca3b7f"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RemoveItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -131,7 +151,8 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         m_PlayerMovement_Movement = m_PlayerMovement.FindAction("Movement", throwIfNotFound: true);
         // Interact
         m_Interact = asset.FindActionMap("Interact", throwIfNotFound: true);
-        m_Interact_Interaction = m_Interact.FindAction("Interaction", throwIfNotFound: true);
+        m_Interact_AddItem = m_Interact.FindAction("AddItem", throwIfNotFound: true);
+        m_Interact_RemoveItem = m_Interact.FindAction("RemoveItem", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -239,12 +260,14 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
     // Interact
     private readonly InputActionMap m_Interact;
     private List<IInteractActions> m_InteractActionsCallbackInterfaces = new List<IInteractActions>();
-    private readonly InputAction m_Interact_Interaction;
+    private readonly InputAction m_Interact_AddItem;
+    private readonly InputAction m_Interact_RemoveItem;
     public struct InteractActions
     {
         private @PlayerControl m_Wrapper;
         public InteractActions(@PlayerControl wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Interaction => m_Wrapper.m_Interact_Interaction;
+        public InputAction @AddItem => m_Wrapper.m_Interact_AddItem;
+        public InputAction @RemoveItem => m_Wrapper.m_Interact_RemoveItem;
         public InputActionMap Get() { return m_Wrapper.m_Interact; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -254,16 +277,22 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_InteractActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_InteractActionsCallbackInterfaces.Add(instance);
-            @Interaction.started += instance.OnInteraction;
-            @Interaction.performed += instance.OnInteraction;
-            @Interaction.canceled += instance.OnInteraction;
+            @AddItem.started += instance.OnAddItem;
+            @AddItem.performed += instance.OnAddItem;
+            @AddItem.canceled += instance.OnAddItem;
+            @RemoveItem.started += instance.OnRemoveItem;
+            @RemoveItem.performed += instance.OnRemoveItem;
+            @RemoveItem.canceled += instance.OnRemoveItem;
         }
 
         private void UnregisterCallbacks(IInteractActions instance)
         {
-            @Interaction.started -= instance.OnInteraction;
-            @Interaction.performed -= instance.OnInteraction;
-            @Interaction.canceled -= instance.OnInteraction;
+            @AddItem.started -= instance.OnAddItem;
+            @AddItem.performed -= instance.OnAddItem;
+            @AddItem.canceled -= instance.OnAddItem;
+            @RemoveItem.started -= instance.OnRemoveItem;
+            @RemoveItem.performed -= instance.OnRemoveItem;
+            @RemoveItem.canceled -= instance.OnRemoveItem;
         }
 
         public void RemoveCallbacks(IInteractActions instance)
@@ -287,6 +316,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
     }
     public interface IInteractActions
     {
-        void OnInteraction(InputAction.CallbackContext context);
+        void OnAddItem(InputAction.CallbackContext context);
+        void OnRemoveItem(InputAction.CallbackContext context);
     }
 }

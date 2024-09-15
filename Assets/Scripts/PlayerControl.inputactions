@@ -78,9 +78,18 @@
             "id": "d69050a3-5d7c-46dc-ba42-f3b6dd6174c2",
             "actions": [
                 {
-                    "name": "Interaction",
+                    "name": "AddItem",
                     "type": "Button",
                     "id": "e761abf6-fd3b-4e1b-9b83-d49ae27f8f5f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Tap",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RemoveItem",
+                    "type": "Button",
+                    "id": "efb09084-626c-4671-ba28-a717a39fbafd",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Tap",
@@ -95,7 +104,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Interaction",
+                    "action": "AddItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9c7caf87-2809-46e9-8bef-7c2cf4ca3b7f",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RemoveItem",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

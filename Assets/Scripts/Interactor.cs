@@ -6,11 +6,12 @@ public class Interactor : MonoBehaviour
 {
     PlayerControl playerControl;
     
-    bool interactionTrue;
+    public bool isAddingItem = false;
+    public bool isRemovingItem = false;
     // Start is called before the first frame update
     public Transform InteractorSource;
     public float InteractRange;
-    [SerializeField] GameObject item;
+    [SerializeField] Item item;
     void Start()
     {
         
@@ -20,17 +21,26 @@ public class Interactor : MonoBehaviour
     void Update()
     {
 
-        if (interactionTrue) {
-            interactionTrue = false;
+        if (isAddingItem) {
+            isAddingItem = false;
             ShelfManager.instance.AddItem(item);
             Debug.Log("E pressed");
         }
+
+        if (isRemovingItem)
+        {
+            isRemovingItem = false;
+            ShelfManager.instance.RemoveItem(item);
+            Debug.Log("A pressed");
+        }
+
     }
     private void OnEnable()
     {
         playerControl = new PlayerControl();
 
-        playerControl.Interact.Interaction.performed += i => interactionTrue = true;
+        playerControl.Interact.AddItem.performed += i => isAddingItem = true;
+        playerControl.Interact.RemoveItem.performed += i => isRemovingItem = true;
 
         playerControl.Enable();
     }

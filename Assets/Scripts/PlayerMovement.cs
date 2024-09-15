@@ -7,6 +7,7 @@ using static UnityEditor.Searcher.SearcherWindow.Alignment;
 public class PlayerMovement : MonoBehaviour
 {
     PlayerControl playerControl;
+
     
     Vector3 targetDirection;
     [SerializeField] Camera Camera;

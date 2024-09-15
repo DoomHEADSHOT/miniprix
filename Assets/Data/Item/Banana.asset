@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a91b2321d6d049d48b3639ad4f9d87cd, type: 3}
+  m_Name: Banana
+  m_EditorClassIdentifier: 
+  itemName: Banana
+  itemPrice: 7
+  itemID: 1
+  itemIcon: {fileID: 0}
+  itemTargetPosition: {fileID: 0}
+  itemModel: {fileID: 6136658526321158282, guid: d53e84cf6a855014087b65d31c9184c7,
+    type: 3}
