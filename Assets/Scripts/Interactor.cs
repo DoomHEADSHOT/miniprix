@@ -23,10 +23,10 @@ public class Interactor : MonoBehaviour
     void Update()
     {
 
-        if (isAddingItem ) 
+        if (isAddingItem) 
         {
             isAddingItem = false;
-            if (canInteract)
+            if (canInteract && shelfManager != null)
             {
                 shelfManager.AddItem(item);
             }
@@ -36,7 +36,7 @@ public class Interactor : MonoBehaviour
         if (isRemovingItem)
         {
             isRemovingItem = false;
-            if (canInteract)
+            if (canInteract && shelfManager != null)
             {
                 shelfManager.RemoveItem(item);
             }
