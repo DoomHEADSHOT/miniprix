@@ -17,14 +17,6 @@ public class ShelfManager : MonoBehaviour
 
     private void Awake()
     {
-        /*if(instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }*/
         instance = this;
         itemSlots = GetComponentsInChildren<ItemInstantiationSlot>();
     }
@@ -83,9 +75,9 @@ public class ShelfManager : MonoBehaviour
         {
             Item removedItem = storedItems.FirstOrDefault(i => i.itemID == item.itemID);
             Debug.Log("Item found : " + removedItem.itemName);
-            foreach (ItemInstantiationSlot slot in itemSlots)
+            foreach (ItemInstantiationSlot slot in itemSlots.Reverse())
             {
-                if (slot.itemID == removedItem.itemID)
+                if (slot.itemID == removedItem.itemID && slot.currentItemModel != null)
                 {
                     Debug.Log("Item Model found : " + removedItem.itemName);    
                     slot.UnloadItem();

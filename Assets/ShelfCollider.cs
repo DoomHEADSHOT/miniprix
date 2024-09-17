@@ -6,6 +6,7 @@ public class ShelfCollider : MonoBehaviour
 {
     [SerializeField] public Collider shelfCollider;
     [SerializeField] public Interactor playerInteractor;
+    [SerializeField] ShelfManager targetShelf;
 
     private void Awake()
     {
@@ -16,11 +17,15 @@ public class ShelfCollider : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         playerInteractor.canInteract = true;
-        ShelfManager targetShelf = other.GetComponentInParent<ShelfManager>();
+        targetShelf = other.GetComponentInParent<ShelfManager>();
 
         if(targetShelf != null)
         {
             playerInteractor.shelfManager = targetShelf;
+        }
+        else
+        {
+            playerInteractor.shelfManager = null;
         }
     }
 
