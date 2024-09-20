@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
+ 
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
     private float cameraSmoothSpeed = 1; //THE BIGGER THIS NUMBER ,THE LONGER FOR THE CAMERA TO REACH ITS POSITION DURING MOVEMENT
     private Vector3 cameraVelocity;
 
-
+    
     private void Awake()
     {
     }
@@ -45,6 +45,8 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+   
+
         vertical = inputMovement.y;
         horizontal = inputMovement.x;
 
