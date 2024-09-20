@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Items/Item")]
+[CreateAssetMenu(menuName = "Item/Fruit")]
 public class Item : ScriptableObject
 {
     [Header("Item Information")]
@@ -12,7 +12,11 @@ public class Item : ScriptableObject
     public Sprite itemIcon;
     public int ItemCount = 0;
 
-
     [SerializeField] public GameObject itemModel;
+
+    private void Awake()
+    {
+        ItemCount = 0;
+    }
 
 }

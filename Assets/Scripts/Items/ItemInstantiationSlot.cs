@@ -11,8 +11,14 @@ public class ItemInstantiationSlot : MonoBehaviour
     {
         if (currentItemModel != null)
         {
-            itemID = 999;
+            Debug.Log("Unloading item with ID " + itemID);
             Destroy(currentItemModel);
+            currentItemModel = null; // Set to null to avoid referencing a destroyed object
+            itemID = 999; // Reset item ID to indicate the slot is empty
+        }
+        else
+        {
+            Debug.LogError("Cannot unload item because currentItemModel is null");
         }
     }
 
